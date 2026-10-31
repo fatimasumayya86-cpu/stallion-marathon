@@ -196,19 +196,19 @@ export const Hero: React.FC = () => {
         {/* Action CTAs: Register Now → · See Packages */}
         <div
           ref={ctaRef}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5 w-full max-w-md"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5 w-full max-w-xl"
           style={{ opacity: 0 }}
         >
           <Link
             to="/packages"
-            className="w-full sm:w-auto px-8 py-3.5 sm:py-4 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-xs sm:text-sm uppercase tracking-[0.2em] shadow-xl shadow-blue-600/35 hover:shadow-blue-600/50 hover:scale-105 border border-blue-400/50 transition-all duration-300 flex items-center justify-center gap-2"
+            className="w-full sm:w-auto px-8 sm:px-9 py-3.5 sm:py-4 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-xs sm:text-sm uppercase tracking-[0.2em] shadow-xl shadow-blue-600/35 hover:shadow-blue-600/50 hover:scale-105 border border-blue-400/50 transition-all duration-300 flex items-center justify-center gap-2 whitespace-nowrap flex-shrink-0"
           >
             <span>Register Now &rarr;</span>
           </Link>
 
           <Link
             to="/packages"
-            className="w-full sm:w-auto px-8 py-3.5 sm:py-4 rounded-full border border-blue-500/40 hover:border-blue-400 bg-slate-900/70 hover:bg-blue-950/70 backdrop-blur-md text-white font-semibold text-xs sm:text-sm uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-center gap-2"
+            className="w-full sm:w-auto px-8 sm:px-9 py-3.5 sm:py-4 rounded-full border border-blue-500/40 hover:border-blue-400 bg-slate-900/70 hover:bg-blue-950/70 backdrop-blur-md text-white font-semibold text-xs sm:text-sm uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-center gap-2 whitespace-nowrap flex-shrink-0"
           >
             <span>See Packages</span>
           </Link>
