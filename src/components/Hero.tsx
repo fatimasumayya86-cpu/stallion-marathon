@@ -106,7 +106,7 @@ export const Hero: React.FC = () => {
 
   return (
     <section
-      className="relative min-h-screen lg:h-screen lg:max-h-screen flex flex-col justify-between overflow-hidden bg-stallion-dark pt-20 pb-4 lg:pt-24 lg:pb-6"
+      className="relative min-h-[100dvh] lg:h-[100dvh] lg:max-h-[100dvh] flex flex-col justify-between overflow-hidden bg-stallion-dark pt-14 pb-2 lg:pt-14 lg:pb-3"
       aria-label="Stallion Marathon Hero"
     >
       {/* ── Background Video & Gradient Layers ────────────────────────────── */}
@@ -141,26 +141,23 @@ export const Hero: React.FC = () => {
         <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
       </div>
 
-      {/* Spacer to balance vertical centering under fixed navbar */}
-      <div className="h-2 sm:h-4" aria-hidden="true" />
-
-      {/* ── Hero Content (Grand, Cinematic & Perfectly Proportioned) ─────────── */}
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center my-auto py-2">
+      {/* ── Hero Content (Grand, Cinematic & Perfectly Fitted in 100vh) ─────────── */}
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center my-auto py-1">
         {/* Badge: Chapter I */}
         <div
           ref={badgeRef}
-          className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full border border-blue-500/50 bg-blue-950/80 backdrop-blur-md mb-2 shadow-xl shadow-blue-500/15 hover:border-blue-400 transition-all duration-300"
+          className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-blue-500/50 bg-blue-950/80 backdrop-blur-md mb-1 sm:mb-1.5 shadow-lg shadow-blue-500/15 hover:border-blue-400 transition-all duration-300"
           style={{ opacity: 0 }}
         >
-          <div className="w-7 h-5 flex items-center justify-center flex-shrink-0">
+          <div className="w-5 h-4 flex items-center justify-center flex-shrink-0">
             <img
               src="/assets/images/stallion-logo-official.png"
               alt="Official Stallion Insignia"
               className="w-full h-full object-contain"
             />
           </div>
-          <div className="h-3.5 w-px bg-blue-500/40" />
-          <span className="text-xs font-bold tracking-[0.25em] uppercase text-white whitespace-nowrap">
+          <div className="h-3 w-px bg-blue-500/40" />
+          <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.22em] uppercase text-white whitespace-nowrap">
             CHAPTER I
           </span>
           <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-ping" aria-hidden="true" />
@@ -172,7 +169,7 @@ export const Hero: React.FC = () => {
         {/* Headline: How’s Your Horse Power? */}
         <h1
           ref={headlineRef}
-          className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black font-serif tracking-tight text-white leading-[1.05] mb-4"
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black font-serif tracking-tight text-white leading-tight mb-1.5 sm:mb-2"
           style={{ opacity: 0 }}
         >
           How&rsquo;s Your <span className="text-royal-gradient">Horse Power?</span>
@@ -181,34 +178,34 @@ export const Hero: React.FC = () => {
         {/* Subline: The first marathon led by a stallion. */}
         <p
           ref={subtitleRef}
-          className="font-serif italic text-lg sm:text-2xl md:text-3xl text-blue-200 font-medium mb-4 tracking-wide"
+          className="font-serif italic text-sm sm:text-base md:text-lg text-blue-200 font-medium mb-1.5 sm:mb-2 tracking-wide"
           style={{ opacity: 0 }}
         >
           The first marathon led by a stallion.
         </p>
 
         {/* Event line: 14 March 2027 · Lemerian Workin Café, Banjara Hills, Hyderabad */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-950/60 border border-blue-500/30 text-slate-200 text-xs sm:text-sm font-medium mb-8">
-          <Calendar className="w-4 h-4 text-blue-400" />
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-blue-950/60 border border-blue-500/30 text-slate-200 text-[11px] sm:text-xs font-medium mb-3 sm:mb-4">
+          <Calendar className="w-3.5 h-3.5 text-blue-400" />
           <span>14 March 2027 &bull; Lemerian Workin Caf&eacute;, Banjara Hills, Hyderabad</span>
         </div>
 
         {/* Action CTAs: Register Now → · See Packages */}
         <div
           ref={ctaRef}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5 w-full max-w-xl"
+          className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full max-w-xl"
           style={{ opacity: 0 }}
         >
           <Link
             to="/packages"
-            className="w-full sm:w-auto px-8 sm:px-9 py-3.5 sm:py-4 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-xs sm:text-sm uppercase tracking-[0.2em] shadow-xl shadow-blue-600/35 hover:shadow-blue-600/50 hover:scale-105 border border-blue-400/50 transition-all duration-300 flex items-center justify-center gap-2 whitespace-nowrap flex-shrink-0"
+            className="w-full sm:w-auto px-7 sm:px-8 py-2.5 sm:py-3 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-xs uppercase tracking-[0.2em] shadow-xl shadow-blue-600/35 hover:shadow-blue-600/50 hover:scale-105 border border-blue-400/50 transition-all duration-300 flex items-center justify-center gap-2 whitespace-nowrap flex-shrink-0"
           >
             <span>Register Now &rarr;</span>
           </Link>
 
           <Link
             to="/packages"
-            className="w-full sm:w-auto px-8 sm:px-9 py-3.5 sm:py-4 rounded-full border border-blue-500/40 hover:border-blue-400 bg-slate-900/70 hover:bg-blue-950/70 backdrop-blur-md text-white font-semibold text-xs sm:text-sm uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-center gap-2 whitespace-nowrap flex-shrink-0"
+            className="w-full sm:w-auto px-7 sm:px-8 py-2.5 sm:py-3 rounded-full border border-blue-500/40 hover:border-blue-400 bg-slate-900/70 hover:bg-blue-950/70 backdrop-blur-md text-white font-semibold text-xs uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-center gap-2 whitespace-nowrap flex-shrink-0"
           >
             <span>See Packages</span>
           </Link>
@@ -224,11 +221,11 @@ export const Hero: React.FC = () => {
             { value: 'Banjara Hills', label: 'Starts & ends at Lemerian Workin Caf\u00e9', color: 'text-blue-400' },
             { value: 'Workshops', label: 'Body, Mind, and Edge sessions', color: 'text-white' },
           ].map(({ value, label, color }) => (
-            <div key={label} className="text-center p-3 sm:p-4 bg-stallion-navy/70">
-              <span className={`block text-base sm:text-lg font-serif font-black ${color}`}>
+            <div key={label} className="text-center p-2 sm:p-2.5 bg-stallion-navy/70">
+              <span className={`block text-sm sm:text-base font-serif font-black ${color}`}>
                 {value}
               </span>
-              <span className="block text-[11px] sm:text-xs text-slate-300 mt-0.5">
+              <span className="block text-[10px] sm:text-[11px] text-slate-300 mt-0.5">
                 {label}
               </span>
             </div>
@@ -236,15 +233,15 @@ export const Hero: React.FC = () => {
         </div>
 
         {/* Video / Audio Controls */}
-        <div className="mt-2.5 flex items-center justify-center gap-3 text-xs text-slate-400">
+        <div className="mt-1.5 flex items-center justify-center gap-3 text-xs text-slate-400">
           <button
             onClick={togglePlay}
             className="p-1 rounded-full hover:bg-stallion-card border border-blue-500/30 hover:text-blue-400 transition"
             title={isPlaying ? 'Pause video' : 'Play video'}
           >
-            {isPlaying ? <Pause className="w-3 h-3" /> : <Play className="w-3 h-3" />}
+            {isPlaying ? <Pause className="w-2.5 h-2.5" /> : <Play className="w-2.5 h-2.5" />}
           </button>
-          <span className="text-[10px] tracking-widest uppercase">
+          <span className="text-[9px] tracking-widest uppercase">
             {videoLoaded ? 'Hyderabad Marathon Video Active' : 'Atmospheric Canvas Active'}
           </span>
           <button
@@ -252,7 +249,7 @@ export const Hero: React.FC = () => {
             className="p-1 rounded-full hover:bg-stallion-card border border-blue-500/30 hover:text-blue-400 transition"
             title={isMuted ? 'Unmute audio' : 'Mute audio'}
           >
-            {isMuted ? <VolumeX className="w-3 h-3" /> : <Volume2 className="w-3 h-3" />}
+            {isMuted ? <VolumeX className="w-2.5 h-2.5" /> : <Volume2 className="w-2.5 h-2.5" />}
           </button>
         </div>
       </div>
