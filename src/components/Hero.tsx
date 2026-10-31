@@ -24,6 +24,7 @@ export const Hero: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(true);
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
+  const [isSprinting, setIsSprinting] = useState(false);
 
   /* GSAP hero entrance */
   useEffect(() => {
@@ -147,7 +148,7 @@ export const Hero: React.FC = () => {
         {/* Badge: Chapter I */}
         <div
           ref={badgeRef}
-          className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full border border-blue-500/50 bg-blue-950/80 backdrop-blur-md mb-5 shadow-xl shadow-blue-500/15 hover:border-blue-400 transition-all duration-300"
+          className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full border border-blue-500/50 bg-blue-950/80 backdrop-blur-md mb-3 shadow-xl shadow-blue-500/15 hover:border-blue-400 transition-all duration-300"
           style={{ opacity: 0 }}
         >
           <div className="w-7 h-5 flex items-center justify-center flex-shrink-0">
@@ -162,6 +163,45 @@ export const Hero: React.FC = () => {
             CHAPTER I
           </span>
           <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-ping" aria-hidden="true" />
+        </div>
+
+        {/* ── Dynamic Leaping Blue Stallion with Jockey (Maya's Official Asset) ─ */}
+        <div
+          className="relative my-2 sm:my-3 flex flex-col items-center justify-center cursor-pointer group select-none"
+          onClick={() => setIsSprinting((prev) => !prev)}
+          title="Click to toggle sprint pace!"
+        >
+          {/* Ambient Royal Blue Backlight Aura */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none" aria-hidden="true">
+            <div
+              className={`w-60 h-28 sm:w-80 sm:h-36 bg-blue-600/30 blur-3xl rounded-full animate-blue-aura transition-all duration-500 ${
+                isSprinting ? 'bg-blue-400/50 scale-125' : ''
+              }`}
+            />
+          </div>
+
+          {/* Kinetic Speed / Wind Streams trailing behind the horse */}
+          <div className="absolute right-0 sm:right-6 inset-y-0 w-36 sm:w-48 flex flex-col justify-center gap-2 pointer-events-none overflow-hidden opacity-80" aria-hidden="true">
+            <div className="h-0.5 bg-gradient-to-r from-blue-400 via-white to-transparent rounded-full animate-speed-stream-1" />
+            <div className="h-[1.5px] bg-gradient-to-r from-blue-300 via-blue-100 to-transparent rounded-full animate-speed-stream-2" />
+            <div className="h-0.5 bg-gradient-to-r from-blue-500 via-blue-200 to-transparent rounded-full animate-speed-stream-3" />
+            <div className="h-[1px] bg-gradient-to-r from-white via-blue-300 to-transparent rounded-full animate-speed-stream-4" />
+          </div>
+
+          {/* Running Stallion Image with Cadenced Gallop Cycle */}
+          <div className={`relative transition-transform duration-300 ${isSprinting ? 'animate-stallion-sprint' : 'animate-stallion-gallop'}`}>
+            <img
+              src="/assets/images/stallion-rider-hero.png"
+              alt="Official Leaping Stallion with Jockey"
+              className="h-24 sm:h-32 md:h-40 w-auto object-contain drop-shadow-[0_12px_28px_rgba(0,71,171,0.7)] filter drop-shadow-[0_0_35px_rgba(29,99,255,0.45)] group-hover:drop-shadow-[0_0_50px_rgba(96,165,250,0.85)] group-hover:scale-105 transition-all duration-300"
+            />
+          </div>
+
+          {/* Interactive Speed Indicator Pill */}
+          <div className="mt-1 flex items-center gap-2 px-3 py-0.5 rounded-full bg-blue-950/80 border border-blue-500/30 text-[10px] text-blue-300 font-medium backdrop-blur-sm group-hover:border-blue-400 transition-colors">
+            <span className={`w-1.5 h-1.5 rounded-full ${isSprinting ? 'bg-amber-400 animate-bounce' : 'bg-blue-400 animate-ping'}`} />
+            <span>{isSprinting ? '⚡ Sprint Pace (Click to Gallop)' : '🐎 Lead Stallion (Click to Sprint)'}</span>
+          </div>
         </div>
 
         {/* Headline: How’s Your Horse Power? */}
