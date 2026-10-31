@@ -144,13 +144,13 @@ export const Hero: React.FC = () => {
 
       {/* ── Hero Content (Grand, Cinematic & Perfectly Proportioned) ─────────── */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center my-auto py-2">
-        {/* Unified Luxury Chapter Badge with Official Stallion Insignia */}
+        {/* Badge: Chapter I */}
         <div
           ref={badgeRef}
-          className="inline-flex items-center gap-3 px-5 py-2 rounded-full border border-blue-500/50 bg-blue-950/80 backdrop-blur-md mb-4 shadow-xl shadow-blue-500/15 hover:border-blue-400 transition-all duration-300"
+          className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full border border-blue-500/50 bg-blue-950/80 backdrop-blur-md mb-5 shadow-xl shadow-blue-500/15 hover:border-blue-400 transition-all duration-300"
           style={{ opacity: 0 }}
         >
-          <div className="w-10 h-6 flex items-center justify-center flex-shrink-0">
+          <div className="w-7 h-5 flex items-center justify-center flex-shrink-0">
             <img
               src="/assets/images/stallion-logo-official.png"
               alt="Official Stallion Insignia"
@@ -158,77 +158,72 @@ export const Hero: React.FC = () => {
             />
           </div>
           <div className="h-3.5 w-px bg-blue-500/40" />
-          <span className="text-[11px] sm:text-xs font-bold tracking-[0.22em] uppercase text-white whitespace-nowrap">
-            CHAPTER I &bull; 14 MARCH 2027 &bull; HYDERABAD
+          <span className="text-xs font-bold tracking-[0.25em] uppercase text-white whitespace-nowrap">
+            CHAPTER I
           </span>
           <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-ping" aria-hidden="true" />
         </div>
 
-        {/* Grand Headline - 2 Majestic Bold Lines */}
+        {/* Headline: How’s Your Horse Power? */}
         <h1
           ref={headlineRef}
-          className="text-4xl sm:text-6xl md:text-7xl lg:text-7xl font-black font-serif tracking-tight text-white leading-[1.05] mb-3 sm:mb-4"
+          className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black font-serif tracking-tight text-white leading-[1.05] mb-4"
           style={{ opacity: 0 }}
         >
-          <span className="block">BORN TO RUN,</span>
-          <span className="block text-royal-gradient">FREE.</span>
+          How&rsquo;s Your <span className="text-royal-gradient">Horse Power?</span>
         </h1>
 
-        {/* Tagline */}
-        <p className="font-serif italic text-base sm:text-xl md:text-2xl text-blue-300 font-medium mb-3 sm:mb-4 tracking-wide">
-          &ldquo;Khoj Khud Ki. Untame Your Strength.&rdquo;
-        </p>
-
-        {/* Vision Copy */}
+        {/* Subline: The first marathon led by a stallion. */}
         <p
           ref={subtitleRef}
-          className="text-sm sm:text-base md:text-lg text-slate-200 font-light max-w-2xl mb-6 leading-relaxed"
+          className="font-serif italic text-lg sm:text-2xl md:text-3xl text-blue-200 font-medium mb-4 tracking-wide"
           style={{ opacity: 0 }}
         >
-          A stallion is never tamed &mdash; only trained. It channels its strength instead of losing it,
-          and that discipline is what turns raw power into a clean, fast stride. On 14th March 2027,
-          Hyderabad's working professionals trade the desk for the start line to meet their work and life stronger.
+          The first marathon led by a stallion.
         </p>
 
-        {/* Action CTAs */}
+        {/* Event line: 14 March 2027 · Lemerian Workin Café, Banjara Hills, Hyderabad */}
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-950/60 border border-blue-500/30 text-slate-200 text-xs sm:text-sm font-medium mb-8">
+          <Calendar className="w-4 h-4 text-blue-400" />
+          <span>14 March 2027 &bull; Lemerian Workin Caf&eacute;, Banjara Hills, Hyderabad</span>
+        </div>
+
+        {/* Action CTAs: Register Now → · See Packages */}
         <div
           ref={ctaRef}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5 w-full max-w-lg"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5 w-full max-w-md"
           style={{ opacity: 0 }}
         >
           <Link
             to="/packages"
-            className="w-full sm:w-auto px-8 sm:px-9 py-3.5 sm:py-4 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-xs sm:text-sm uppercase tracking-[0.2em] shadow-xl shadow-blue-600/35 hover:shadow-blue-600/50 hover:scale-105 border border-blue-400/50 transition-all duration-300 flex items-center justify-center gap-2"
+            className="w-full sm:w-auto px-8 py-3.5 sm:py-4 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-xs sm:text-sm uppercase tracking-[0.2em] shadow-xl shadow-blue-600/35 hover:shadow-blue-600/50 hover:scale-105 border border-blue-400/50 transition-all duration-300 flex items-center justify-center gap-2"
           >
-            <span>Explore 9 Distances</span>
-            <ArrowRight className="w-4 h-4 text-white" aria-hidden="true" />
+            <span>Register Now &rarr;</span>
           </Link>
 
           <Link
-            to="/story"
-            className="w-full sm:w-auto px-8 sm:px-9 py-3.5 sm:py-4 rounded-full border border-blue-500/40 hover:border-blue-400 bg-slate-900/70 hover:bg-blue-950/70 backdrop-blur-md text-white font-semibold text-xs sm:text-sm uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-center gap-2"
+            to="/packages"
+            className="w-full sm:w-auto px-8 py-3.5 sm:py-4 rounded-full border border-blue-500/40 hover:border-blue-400 bg-slate-900/70 hover:bg-blue-950/70 backdrop-blur-md text-white font-semibold text-xs sm:text-sm uppercase tracking-[0.2em] transition-all duration-300 flex items-center justify-center gap-2"
           >
-            <Compass className="w-4 h-4 text-blue-400" aria-hidden="true" />
-            <span>The Concept Story</span>
+            <span>See Packages</span>
           </Link>
         </div>
       </div>
 
-      {/* ── Bottom Section: Stats Bar & Audio Bar (Pinned inside viewport) ─── */}
+      {/* ── Quick facts ──────────────────────────────────────────────────────── */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 w-full mt-auto">
-        {/* Event At A Glance Stats Bar */}
-        <div className="w-full grid grid-cols-2 md:grid-cols-4 gap-px rounded-xl overflow-hidden glass-panel shadow-lg">
+        <div className="w-full grid grid-cols-2 md:grid-cols-4 gap-px rounded-xl overflow-hidden glass-panel shadow-lg border border-blue-500/20">
           {[
-            { value: '9 Distances', label: '1 to 21 KM Range', color: 'text-blue-400' },
-            { value: '3 Tracks', label: '11 Workshop Sessions', color: 'text-white' },
-            { value: '₹1 Lakh+', label: 'Prize Money Pool', color: 'text-blue-400' },
-            { value: '25 Seats', label: 'VIP Black Stallion Circle', color: 'text-white' },
+            { value: '14 March 2027', label: 'Race day', color: 'text-blue-400' },
+            { value: '9 Distances', label: 'From 1 KM to 21 KM', color: 'text-white' },
+            { value: 'Banjara Hills', label: 'Starts & ends at Lemerian Workin Caf\u00e9', color: 'text-blue-400' },
+            { value: 'Workshops', label: 'Body, Mind, and Edge sessions', color: 'text-white' },
           ].map(({ value, label, color }) => (
-            <div key={label} className="text-center p-2.5 sm:p-3 bg-stallion-navy/60">
-              <span className={`block text-base sm:text-xl font-serif font-black ${color}`}>
+            <div key={label} className="text-center p-3 sm:p-4 bg-stallion-navy/70">
+              <span className={`block text-base sm:text-lg font-serif font-black ${color}`}>
                 {value}
               </span>
-              <span className="block text-[10px] sm:text-[11px] uppercase tracking-wider text-slate-400 mt-0.5">
+              <span className="block text-[11px] sm:text-xs text-slate-300 mt-0.5">
                 {label}
               </span>
             </div>

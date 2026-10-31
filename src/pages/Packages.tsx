@@ -1,61 +1,45 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import confetti from 'canvas-confetti';
 import { AnimatedSection } from '../components/AnimatedSection';
 import {
-  Check,
-  Sparkles,
-  Crown,
-  ChevronDown,
-  X,
   CheckCircle2,
   Calendar,
   MapPin,
-  Coffee,
-  Heart,
-  Stethoscope,
-  Shield,
+  Sparkles,
+  ArrowRight,
+  X,
+  Star,
+  Activity,
+  Brain,
+  Zap,
 } from 'lucide-react';
 
-/* ─── Maya's Complete Pricing Table across 9 Distances ─────────────────── */
-const distanceCatalog = [
-  { distance: '1 KM', basic: 299, standard: 345, premium: 455 },
-  { distance: '2 KM', basic: 345, standard: 445, premium: 599 },
-  { distance: '3 KM', basic: 499, standard: 599, premium: 649 },
-  { distance: '5 KM', basic: 799, standard: 999, premium: 1499, note: 'Confirmed standard rate ₹999 per costing workbook' },
-  { distance: '8 KM', basic: 999, standard: 1499, premium: 1899 },
-  { distance: '10 KM', basic: 1299, standard: 1899, premium: 2299 },
-  { distance: '12 KM', basic: 1499, standard: 2199, premium: 2499 },
-  { distance: '15 KM', basic: 1699, standard: 2399, premium: 2699 },
-  { distance: '21 KM', basic: 1899, standard: 2599, premium: 2999 },
+/* ── 5 KM & Above Distance Pricing Catalog ─────────────────────────────── */
+const distances5Up = [
+  { distance: '5 KM', basic: 799, standard: 999, premium: 1499, desc: 'The classic city challenge through central Hyderabad.' },
+  { distance: '8 KM', basic: 999, standard: 1499, premium: 1899, desc: 'Stepping stone for runners building sustained endurance.' },
+  { distance: '10 KM', basic: 1299, standard: 1899, premium: 2299, desc: 'Official benchmark distance for active runners.' },
+  { distance: '12 KM', basic: 1499, standard: 2199, premium: 2499, desc: 'Extended course. Premium includes Stallion water bottle.' },
+  { distance: '15 KM', basic: 1699, standard: 2399, premium: 2699, desc: 'Advanced endurance test across Hyderabad city circuits.' },
+  { distance: '21 KM', basic: 1899, standard: 2599, premium: 2999, desc: 'Half Marathon distance. Includes 1-week membership with Standard.' },
 ];
 
 export const Packages: React.FC = () => {
-  const [selectedDistance, setSelectedDistance] = useState('5 KM');
+  const [selectedDist, setSelectedDist] = useState(distances5Up[0]); // default 5KM
   const [activeModal, setActiveModal] = useState<{
     tier: string;
-    distance?: string;
-    price: number;
-    isVip?: boolean;
+    distance: string;
+    price: number | string;
   } | null>(null);
 
-  const [vipSeatNumber, setVipSeatNumber] = useState<number>(7);
-  const [attendeeName, setAttendeeName] = useState('');
-  const [attendeeEmail, setAttendeeEmail] = useState('');
-  const [attendeePhone, setAttendeePhone] = useState('');
-  const [workshopTrackChoice, setWorkshopTrackChoice] = useState('Body');
   const [bookingDone, setBookingDone] = useState(false);
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
 
-  const currentDistObj =
-    distanceCatalog.find((d) => d.distance === selectedDistance) || distanceCatalog[3];
-
-  const handleOpenBooking = (tier: string, price: number, isVip = false) => {
-    setActiveModal({
-      tier,
-      distance: isVip ? 'All Access (1–21 KM)' : selectedDistance,
-      price,
-      isVip,
-    });
+  const handleOpenBooking = (tier: string, distance: string, price: number | string) => {
+    setActiveModal({ tier, distance, price });
     setBookingDone(false);
   };
 
@@ -63,561 +47,452 @@ export const Packages: React.FC = () => {
     e.preventDefault();
     setBookingDone(true);
     confetti({
-      particleCount: 110,
+      particleCount: 100,
       spread: 70,
       origin: { y: 0.6 },
-      colors: ['#D4AF37', '#F6E4A8', '#0C1322', '#FFFFFF'],
+      colors: ['#1D63FF', '#60A5FA', '#FFFFFF', '#0047AB'],
     });
   };
 
-  const faqs = [
-    {
-      q: 'Where do the run packages start and finish?',
-      a: 'All 9 race distances start and finish at Lemerian Workin Café, Banjara Hills, Hyderabad on Sunday, 14 March 2027.',
-    },
-    {
-      q: 'When and where are the 11 workshop sessions conducted?',
-      a: 'Workshops are conducted separately from race day in small batches of 30 to 100 participants across three tracks: Body (3 sessions), Mind (4 sessions), and Edge (4 sessions).',
-    },
-    {
-      q: 'What is the Black Stallion VIP Circle?',
-      a: 'The VIP tier is founding patronage of Chapter I: a one-time, strictly capped 25-seat circle (numbered Stallion #01 to #25). Patrons receive private lounge access, pre-run founder dinner, all workshops, and permanently carry the title Founding Stallion.',
-    },
-    {
-      q: 'Are on-ground health check-ups included?',
-      a: 'Yes, on-ground health check-ups with practising doctors are included in the Standard, Premium, and Black Stallion VIP packages.',
-    },
-  ];
-
   return (
-    <div className="min-h-screen bg-stallion-dark pt-28 pb-20">
+    <div className="min-h-screen bg-stallion-dark text-slate-100 pt-28 pb-24">
       {/* ── Page Header ───────────────────────────────────────────────────── */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 text-center">
-        <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full border border-stallion-gold/40 bg-stallion-card mb-4 text-xs font-bold uppercase tracking-widest text-stallion-gold">
-          <Crown className="w-3.5 h-3.5" />
-          <span>Race Packages &amp; Pricing &bull; Chapter I</span>
-        </div>
-        <h1 className="text-4xl sm:text-6xl font-serif font-black text-stallion-champagne tracking-tight">
-          CHOOSE YOUR STRIDE
-        </h1>
-        <div className="w-20 h-0.5 bg-stallion-gold mx-auto my-6" />
-        <p className="max-w-3xl mx-auto text-slate-300 text-base sm:text-lg leading-relaxed">
-          Select from 9 certified distances (1 to 21 KM) across three comprehensive packages,
-          or claim one of 25 founding seats in the prestigious Black Stallion Circle.
-        </p>
-      </div>
-
-      {/* ── Distance Selector Bar ─────────────────────────────────────────── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-        <div className="p-4 rounded-3xl glass-panel border border-stallion-gold/30">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pb-4 border-b border-stallion-border/40">
-            <div>
-              <span className="text-[10px] uppercase font-bold tracking-widest text-stallion-gold block">
-                Step 1: Choose Distance
-              </span>
-              <span className="text-base font-serif font-bold text-stallion-champagne">
-                Active Selection: {selectedDistance}
-              </span>
-            </div>
-            <span className="text-xs text-stallion-muted">
-              14 March 2027 &bull; Lemerian Workin Café, Hyderabad
-            </span>
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 text-center">
+        <AnimatedSection direction="up">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-blue-500/40 bg-blue-950/70 mb-6 text-xs font-bold uppercase tracking-widest text-blue-300">
+            <Sparkles className="w-3.5 h-3.5 text-blue-400" />
+            <span>Chapter I &bull; 14 March 2027</span>
           </div>
 
-          <div className="grid grid-cols-3 sm:grid-cols-9 gap-2 pt-4">
-            {distanceCatalog.map((d) => (
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif font-black text-white tracking-tight mb-4">
+            Choose Your Run
+          </h1>
+
+          <p className="text-base sm:text-xl text-slate-300 font-light max-w-2xl mx-auto">
+            Pick a distance, then pick a package. Workshops are booked separately.
+          </p>
+
+          <div className="w-20 h-0.5 bg-blue-500 mx-auto my-6" />
+
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-blue-950/60 border border-blue-500/30 text-xs sm:text-sm text-slate-200">
+            <Calendar className="w-4 h-4 text-blue-400" />
+            <span>14 March 2027 &bull; Lemerian Workin Caf&eacute;, Banjara Hills, Hyderabad</span>
+          </div>
+        </AnimatedSection>
+      </section>
+
+      {/* ── Section 1: STUD Short-Distance Runs ────────────────────────────── */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+        <AnimatedSection direction="up">
+          <div className="rounded-3xl border border-blue-500/40 bg-gradient-to-br from-blue-950/60 via-slate-900/90 to-blue-950/70 p-8 sm:p-12 shadow-2xl">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 pb-6 border-b border-blue-900/50">
+              <div>
+                <span className="text-xs uppercase tracking-[0.25em] font-bold text-blue-400 block mb-1">
+                  Short Runs &bull; 1, 2, and 3 KM
+                </span>
+                <h2 className="text-3xl sm:text-4xl font-serif font-black text-white">
+                  STUD
+                </h2>
+                <p className="text-slate-300 text-sm mt-1">
+                  Our short-distance runs: 1, 2, and 3 KM. Perfect for first-timers, students, and families.
+                </p>
+              </div>
+
+              <div className="text-xs text-blue-300 font-medium px-3.5 py-1.5 rounded-full bg-blue-950/80 border border-blue-500/30 w-fit">
+                Untimed Fun Runs &bull; Participation Certificate
+              </div>
+            </div>
+
+            {/* STUD Price Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[
+                { dist: '1 KM', price: 455, desc: 'Introductory community dash suitable for all age groups.' },
+                { dist: '2 KM', price: 599, desc: 'A swift, energizing distance for beginners.' },
+                { dist: '3 KM', price: 649, desc: 'Build momentum along the Banjara Hills course.' },
+              ].map(({ dist, price, desc }) => (
+                <div
+                  key={dist}
+                  className="glass-panel p-6 rounded-2xl border border-blue-900/60 glass-panel-hover flex flex-col justify-between space-y-4"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-xs font-bold uppercase tracking-wider text-blue-400">STUD Run</span>
+                      <span className="text-[11px] px-2 py-0.5 rounded bg-blue-950 text-blue-300">Untimed</span>
+                    </div>
+                    <h3 className="text-2xl font-serif font-black text-white">{dist}</h3>
+                    <p className="text-xs text-slate-300 mt-1">{desc}</p>
+                    <div className="mt-4 pt-4 border-t border-blue-900/50">
+                      <span className="text-3xl font-serif font-black text-white">₹{price}</span>
+                      <span className="text-xs text-slate-400 ml-1">all-inclusive</span>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={() => handleOpenBooking('STUD', dist, price)}
+                    className="w-full py-2.5 rounded-xl bg-blue-600/80 hover:bg-blue-600 text-white font-bold text-xs uppercase tracking-wider transition shadow-md hover:shadow-blue-600/30"
+                  >
+                    Register for {dist} &rarr;
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        </AnimatedSection>
+      </section>
+
+      {/* ── Section 2: 5 KM and Above (Basic, Standard, Premium) ───────────── */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+        <AnimatedSection direction="up" className="text-center max-w-3xl mx-auto mb-10">
+          <span className="text-xs uppercase tracking-[0.3em] font-bold text-blue-400">
+            5 KM to 21 KM Runs
+          </span>
+          <h2 className="text-3xl sm:text-5xl font-serif font-black text-white mt-2">
+            Distance Packages
+          </h2>
+          <div className="w-16 h-0.5 bg-blue-500 mx-auto my-4" />
+          <p className="text-slate-300 text-sm sm:text-base">
+            First select your distance below, then choose between Basic, Standard, and Premium packages.
+          </p>
+
+          {/* Distance Selector Pills */}
+          <div className="flex flex-wrap items-center justify-center gap-2 mt-8">
+            {distances5Up.map((d) => (
               <button
                 key={d.distance}
-                onClick={() => setSelectedDistance(d.distance)}
-                className={`py-3 rounded-xl font-serif font-bold text-sm transition-all duration-200 border ${
-                  selectedDistance === d.distance
-                    ? 'bg-stallion-gold text-stallion-dark border-stallion-gold shadow-lg shadow-stallion-gold/20 scale-105'
-                    : 'bg-stallion-card border-stallion-border text-slate-300 hover:text-white hover:border-stallion-gold/50'
+                onClick={() => setSelectedDist(d)}
+                className={`px-4 py-2 rounded-xl font-bold text-xs sm:text-sm transition-all duration-200 ${
+                  selectedDist.distance === d.distance
+                    ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30 scale-105 border border-blue-400'
+                    : 'bg-stallion-card/80 text-slate-300 hover:text-white hover:bg-blue-950/70 border border-blue-900/40'
                 }`}
               >
                 {d.distance}
               </button>
             ))}
           </div>
+
+          <p className="text-xs text-blue-300 mt-4">
+            Viewing packages for <strong className="text-white">{selectedDist.distance}</strong>: {selectedDist.desc}
+          </p>
+        </AnimatedSection>
+
+        {/* 3 Package Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* 1. Basic */}
+          <AnimatedSection delay={0.1} direction="up" className="glass-panel rounded-3xl p-8 border border-blue-900/50 glass-panel-hover flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-xs uppercase tracking-wider text-slate-300 font-bold">General Entry</span>
+                <span className="text-[11px] px-2.5 py-0.5 rounded-full bg-blue-950 border border-blue-800 text-slate-300">
+                  {selectedDist.distance}
+                </span>
+              </div>
+              <h3 className="text-2xl font-serif font-bold text-white">Basic</h3>
+              <p className="text-xs text-slate-300 mt-1 mb-4">
+                For 5 KM and above. Run at your own pace.
+              </p>
+
+              <div className="mt-2 mb-6">
+                <span className="text-3xl font-serif font-black text-white">₹{selectedDist.basic}</span>
+                <span className="text-xs text-slate-400 ml-1.5">for {selectedDist.distance}</span>
+              </div>
+
+              <div className="space-y-3 pt-4 border-t border-blue-900/40 text-xs text-slate-200">
+                <div className="flex items-center gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0" />
+                  <span>Breakfast</span>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0" />
+                  <span>Event T-shirt</span>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0" />
+                  <span>Race BIB</span>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0" />
+                  <span>Refreshments</span>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0" />
+                  <span>Untimed run</span>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0" />
+                  <span>Participation certificate</span>
+                </div>
+              </div>
+            </div>
+
+            <button
+              onClick={() => handleOpenBooking('Basic', selectedDist.distance, selectedDist.basic)}
+              className="mt-8 w-full py-3.5 rounded-xl border border-blue-500/40 hover:border-blue-400 text-white text-xs font-bold uppercase tracking-wider text-center block transition hover:bg-blue-900/40"
+            >
+              Choose Basic &rarr;
+            </button>
+          </AnimatedSection>
+
+          {/* 2. Standard ⭐ Most Popular */}
+          <AnimatedSection delay={0.2} direction="up" className="glass-panel rounded-3xl p-8 border-2 border-blue-500 shadow-2xl shadow-blue-600/20 relative glass-panel-hover flex flex-col justify-between md:scale-105 bg-blue-950/30">
+            <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-blue-600 text-white font-extrabold text-[11px] uppercase tracking-wider shadow-lg flex items-center gap-1.5 whitespace-nowrap">
+              <Star className="w-3.5 h-3.5 fill-current" />
+              <span>Most Popular</span>
+            </div>
+
+            <div>
+              <div className="flex items-center justify-between mb-4 mt-2">
+                <span className="text-xs uppercase tracking-wider text-blue-400 font-bold">Timed &amp; Medal</span>
+                <span className="text-[11px] px-2.5 py-0.5 rounded-full bg-blue-600/20 text-blue-300 border border-blue-500/40 font-semibold">
+                  {selectedDist.distance}
+                </span>
+              </div>
+              <h3 className="text-2xl font-serif font-bold text-white">Standard</h3>
+              <p className="text-xs text-slate-300 mt-1 mb-4">
+                For runners who want a timed run and a medal
+              </p>
+
+              <div className="mt-2 mb-6">
+                <span className="text-3xl font-serif font-black text-blue-300">₹{selectedDist.standard}</span>
+                <span className="text-xs text-slate-400 ml-1.5">for {selectedDist.distance}</span>
+              </div>
+
+              <div className="space-y-3 pt-4 border-t border-blue-900/40 text-xs text-slate-200">
+                <div className="flex items-center gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0" />
+                  <span className="font-semibold text-white">Timed run</span>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0" />
+                  <span>Finisher certificate and medal</span>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0" />
+                  <span>Breakfast (8 KM and above)</span>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0" />
+                  <span>Health check-up</span>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0" />
+                  <span>One-week Lemerian membership with the 21 KM run</span>
+                </div>
+              </div>
+            </div>
+
+            <button
+              onClick={() => handleOpenBooking('Standard', selectedDist.distance, selectedDist.standard)}
+              className="mt-8 w-full py-3.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-xs uppercase tracking-wider text-center block transition shadow-lg shadow-blue-600/30 hover:scale-105"
+            >
+              Choose Standard &rarr;
+            </button>
+          </AnimatedSection>
+
+          {/* 3. Premium */}
+          <AnimatedSection delay={0.3} direction="up" className="glass-panel rounded-3xl p-8 border border-blue-900/50 glass-panel-hover flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-xs uppercase tracking-wider text-slate-300 font-bold">All-Inclusive</span>
+                <span className="text-[11px] px-2.5 py-0.5 rounded-full bg-blue-950 border border-blue-800 text-slate-300">
+                  {selectedDist.distance}
+                </span>
+              </div>
+              <h3 className="text-2xl font-serif font-bold text-white">Premium</h3>
+              <p className="text-xs text-slate-300 mt-1 mb-4">
+                The full experience
+              </p>
+
+              <div className="mt-2 mb-6">
+                <span className="text-3xl font-serif font-black text-white">₹{selectedDist.premium}</span>
+                <span className="text-xs text-slate-400 ml-1.5">for {selectedDist.distance}</span>
+              </div>
+
+              <div className="space-y-3 pt-4 border-t border-blue-900/40 text-xs text-slate-200">
+                <div className="flex items-center gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0" />
+                  <span className="font-semibold text-white">Buffet breakfast</span>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0" />
+                  <span>BIB delivered to your home (selected distances)</span>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0" />
+                  <span>One-month Lemerian membership (selected distances)</span>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0" />
+                  <span>Water bottle with the 12 KM run</span>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0" />
+                  <span>Health check-up</span>
+                </div>
+              </div>
+            </div>
+
+            <button
+              onClick={() => handleOpenBooking('Premium', selectedDist.distance, selectedDist.premium)}
+              className="mt-8 w-full py-3.5 rounded-xl border border-blue-500/40 hover:border-blue-400 text-white text-xs font-bold uppercase tracking-wider text-center block transition hover:bg-blue-900/40"
+            >
+              Choose Premium &rarr;
+            </button>
+          </AnimatedSection>
         </div>
       </section>
 
-      {/* ── 3 Main Run Packages for Selected Distance ─────────────────────── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
-          {/* 1. Basic Package */}
-          <AnimatedSection delay={0.1} className="glass-panel rounded-3xl p-8 flex flex-col justify-between border border-stallion-border/70 glass-panel-hover">
-            <div>
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-xs uppercase tracking-wider text-stallion-muted font-bold">
-                  General Entry
+      {/* ── Section 3: Workshops (Optional Add-on) ─────────────────────────── */}
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+        <AnimatedSection direction="up">
+          <div className="rounded-3xl border border-blue-500/30 bg-gradient-to-r from-blue-950/60 via-slate-900/80 to-blue-950/60 p-8 sm:p-10 shadow-xl">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-6 border-b border-blue-900/40">
+              <div>
+                <span className="text-xs uppercase tracking-widest text-blue-400 font-bold block mb-1">
+                  Optional Add-on
                 </span>
-                <span className="text-[10px] uppercase font-bold px-2.5 py-0.5 rounded-full bg-stallion-navy border border-stallion-border text-slate-300">
-                  Trot
-                </span>
-              </div>
-              <h3 className="text-2xl font-serif font-bold text-stallion-champagne">Basic Package</h3>
-              <p className="text-xs text-stallion-muted mt-1">Core race entry &amp; breakfast</p>
-
-              <div className="my-6 pt-4 border-t border-stallion-border/40">
-                <span className="text-xs text-stallion-muted block">Entry Fee</span>
-                <div className="flex items-baseline gap-2">
-                  <span className="text-3xl font-serif font-black text-stallion-gold">
-                    ₹{currentDistObj.basic}
-                  </span>
-                  <span className="text-xs text-stallion-muted">for {selectedDistance}</span>
-                </div>
+                <h3 className="text-2xl sm:text-3xl font-serif font-black text-white">
+                  Workshops
+                </h3>
+                <p className="text-slate-300 text-sm mt-2 max-w-xl">
+                  Add a Body, Mind, or Edge workshop to your registration. See the Story page for topics.
+                </p>
               </div>
 
-              <div className="space-y-3 pt-2 text-xs text-slate-300">
-                <span className="block text-[11px] uppercase font-bold tracking-wider text-stallion-champagne">
-                  What's Included:
-                </span>
-                <div className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-stallion-gold flex-shrink-0 mt-0.5" />
-                  <span>Breakfast at Lemerian Workin Café</span>
-                </div>
-                <div className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-stallion-gold flex-shrink-0 mt-0.5" />
-                  <span>Timing Bib with official tracked chip</span>
-                </div>
-                <div className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-stallion-gold flex-shrink-0 mt-0.5" />
-                  <span>Finisher Medal</span>
-                </div>
-                <div className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-stallion-gold flex-shrink-0 mt-0.5" />
-                  <span>E-Certificate of Completion</span>
-                </div>
-                <div className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-stallion-gold flex-shrink-0 mt-0.5" />
-                  <span>Course Hydration &amp; Medical Aid Stations</span>
-                </div>
+              <div className="text-left md:text-right">
+                <span className="text-xs uppercase tracking-wider text-slate-400 block">Workshop Pricing</span>
+                <span className="text-xl font-serif font-bold text-blue-300">Prices: to be confirmed</span>
               </div>
             </div>
 
-            <button
-              onClick={() => handleOpenBooking('Basic', currentDistObj.basic)}
-              className="mt-8 w-full py-3.5 rounded-xl border border-stallion-border hover:border-stallion-gold text-stallion-champagne hover:bg-stallion-card text-xs font-bold uppercase tracking-widest transition"
-            >
-              Select Basic (₹{currentDistObj.basic})
-            </button>
-          </AnimatedSection>
-
-          {/* 2. Standard Package (Recommended) */}
-          <AnimatedSection delay={0.2} className="glass-panel rounded-3xl p-8 flex flex-col justify-between border-2 border-stallion-gold shadow-2xl shadow-stallion-gold/15 relative glass-panel-hover lg:scale-[1.03]">
-            <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-stallion-gold text-stallion-dark font-extrabold text-[10px] uppercase tracking-widest shadow-md">
-              Most Popular
-            </div>
-
-            <div>
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-xs uppercase tracking-wider text-stallion-gold font-bold">
-                  Race Gear &amp; Health
-                </span>
-                <span className="text-[10px] uppercase font-bold px-2.5 py-0.5 rounded-full bg-stallion-gold/20 text-stallion-gold">
-                  Standard
-                </span>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6">
+              <div className="p-4 rounded-xl bg-blue-950/40 border border-blue-900/40">
+                <span className="text-xs font-bold text-blue-300 uppercase block mb-1">Track 1: Body</span>
+                <span className="text-xs text-slate-300">Diet for a working day &bull; Physical wellbeing &bull; Self-defence</span>
               </div>
-              <h3 className="text-2xl font-serif font-bold text-stallion-champagne">Standard Package</h3>
-              <p className="text-xs text-stallion-muted mt-1">Official T-Shirt &amp; Doctor health check</p>
-
-              <div className="my-6 pt-4 border-t border-stallion-border/40">
-                <span className="text-xs text-stallion-muted block">Entry Fee</span>
-                <div className="flex items-baseline gap-2">
-                  <span className="text-3xl font-serif font-black text-stallion-gold">
-                    ₹{currentDistObj.standard}
-                  </span>
-                  <span className="text-xs text-stallion-muted">for {selectedDistance}</span>
-                </div>
+              <div className="p-4 rounded-xl bg-blue-950/40 border border-blue-900/40">
+                <span className="text-xs font-bold text-blue-300 uppercase block mb-1">Track 2: Mind</span>
+                <span className="text-xs text-slate-300">Attention span &bull; Cognitive intelligence &bull; Psychological wellbeing &bull; Gratitude</span>
               </div>
-
-              <div className="space-y-3 pt-2 text-xs text-slate-200">
-                <span className="block text-[11px] uppercase font-bold tracking-wider text-stallion-gold">
-                  Everything in Basic, plus:
-                </span>
-                <div className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-stallion-gold flex-shrink-0 mt-0.5" />
-                  <span className="font-semibold text-white">Official Stallion Dri-Fit Running T-Shirt</span>
-                </div>
-                <div className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-stallion-gold flex-shrink-0 mt-0.5" />
-                  <span>Goodie Bag with partner vouchers</span>
-                </div>
-                <div className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-stallion-gold flex-shrink-0 mt-0.5" />
-                  <span className="text-emerald-400 font-semibold">On-ground health check-up with practising doctors</span>
-                </div>
+              <div className="p-4 rounded-xl bg-blue-950/40 border border-blue-900/40">
+                <span className="text-xs font-bold text-blue-300 uppercase block mb-1">Track 3: Edge</span>
+                <span className="text-xs text-slate-300">Pitch &amp; sell &bull; Internships &bull; Data &amp; cybercrime &bull; Handling bullies</span>
               </div>
             </div>
 
-            <button
-              onClick={() => handleOpenBooking('Standard', currentDistObj.standard)}
-              className="mt-8 w-full py-3.5 rounded-xl bg-gradient-to-r from-stallion-gold via-stallion-gold-light to-stallion-gold text-stallion-dark text-xs font-black uppercase tracking-widest transition shadow-lg shadow-stallion-gold/20 hover:scale-[1.02]"
-            >
-              Select Standard (₹{currentDistObj.standard})
-            </button>
-          </AnimatedSection>
-
-          {/* 3. Premium Package */}
-          <AnimatedSection delay={0.3} className="glass-panel rounded-3xl p-8 flex flex-col justify-between border border-stallion-border/70 glass-panel-hover">
-            <div>
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-xs uppercase tracking-wider text-stallion-muted font-bold">
-                  Run + Workshop
-                </span>
-                <span className="text-[10px] uppercase font-bold px-2.5 py-0.5 rounded-full bg-stallion-navy border border-stallion-border text-slate-300">
-                  Canter
-                </span>
-              </div>
-              <h3 className="text-2xl font-serif font-bold text-stallion-champagne">Premium Package</h3>
-              <p className="text-xs text-stallion-muted mt-1">Includes 1 Workshop Track &amp; Recovery</p>
-
-              <div className="my-6 pt-4 border-t border-stallion-border/40">
-                <span className="text-xs text-stallion-muted block">Entry Fee</span>
-                <div className="flex items-baseline gap-2">
-                  <span className="text-3xl font-serif font-black text-stallion-gold">
-                    ₹{currentDistObj.premium}
-                  </span>
-                  <span className="text-xs text-stallion-muted">for {selectedDistance}</span>
-                </div>
-              </div>
-
-              <div className="space-y-3 pt-2 text-xs text-slate-300">
-                <span className="block text-[11px] uppercase font-bold tracking-wider text-stallion-gold">
-                  Everything in Standard, plus:
-                </span>
-                <div className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-stallion-gold flex-shrink-0 mt-0.5" />
-                  <span className="font-semibold text-white">Access to 1 Workshop Track (Body, Mind, or Edge)</span>
-                </div>
-                <div className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-stallion-gold flex-shrink-0 mt-0.5" />
-                  <span>Post-run Recovery Zone access (Physio / Ice Bath)</span>
-                </div>
-                <div className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-stallion-gold flex-shrink-0 mt-0.5" />
-                  <span>Lemerian Café voucher for post-race refreshment</span>
-                </div>
-              </div>
-            </div>
-
-            <button
-              onClick={() => handleOpenBooking('Premium', currentDistObj.premium)}
-              className="mt-8 w-full py-3.5 rounded-xl border border-stallion-gold/60 hover:bg-stallion-gold hover:text-stallion-dark text-stallion-champagne text-xs font-bold uppercase tracking-widest transition"
-            >
-              Select Premium (₹{currentDistObj.premium})
-            </button>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* ── Section: The VIP Circle — Black Stallion Circle (₹50,000) ──────── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
-        <div className="rounded-3xl glass-panel p-8 sm:p-12 border-2 border-stallion-gold relative overflow-hidden shadow-2xl shadow-stallion-gold/10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div className="lg:col-span-8 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-stallion-gold/20 text-stallion-gold text-xs font-bold uppercase tracking-widest">
-                <Crown className="w-4 h-4" />
-                <span>Founding Patronage &bull; Strictly Capped at 25 Seats</span>
-              </div>
-
-              <h2 className="text-3xl sm:text-5xl font-serif font-black text-stallion-champagne">
-                BLACK STALLION CIRCLE
-              </h2>
-
-              <p className="font-serif italic text-base text-stallion-gold">
-                &ldquo;Stallions aren't born tamed. They're untamed by choice. Twenty-five people will stand at the front of Chapter I. Stallion #__ is yours.&rdquo;
-              </p>
-
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                The VIP tier is not a race entry. It is founding patronage of Chapter I: a one-time, limited,
-                numbered seat at the start of something new. Chapter I can never be repeated, and early patrons
-                carry that status permanently.
-              </p>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-200 pt-2">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-stallion-gold flex-shrink-0" />
-                  <span>Private lounge at Lemerian with dedicated host</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-stallion-gold flex-shrink-0" />
-                  <span>Pre-run dinner/breakfast with founder &amp; sponsors</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-stallion-gold flex-shrink-0" />
-                  <span>All 11 Workshop Sessions included</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-stallion-gold flex-shrink-0" />
-                  <span>Personalised bib &amp; custom finisher keepsake</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-stallion-gold flex-shrink-0" />
-                  <span>Coffee hamper from Lemerian sourcing model</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-stallion-gold flex-shrink-0" />
-                  <span>Lemerian Coworking pass / café credit</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-stallion-gold flex-shrink-0" />
-                  <span>Name permanently on the Lemerian Wall</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-stallion-gold flex-shrink-0" />
-                  <span>Reusable professional photography &amp; video package</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="lg:col-span-4 flex flex-col items-center justify-center p-8 rounded-2xl bg-stallion-card/90 border border-stallion-border text-center">
-              <span className="text-xs uppercase tracking-widest text-stallion-muted font-bold">
-                Founding Seat
+            <div className="mt-6 pt-4 border-t border-blue-900/40 flex justify-between items-center flex-wrap gap-4">
+              <span className="text-xs text-slate-400">
+                Conducted at Lemerian Workin Caf&eacute; in small batches of 30 to 100 participants.
               </span>
-              <span className="text-4xl sm:text-5xl font-serif font-black text-stallion-gold mt-2 mb-1">
-                ₹50,000
-              </span>
-              <span className="text-[11px] text-stallion-muted mb-6">
-                11 of 25 seats remaining
-              </span>
-
-              {/* Numbered Seat Picker */}
-              <div className="w-full mb-6 text-left">
-                <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-                  Select Your Stallion Seat Number:
-                </label>
-                <select
-                  value={vipSeatNumber}
-                  onChange={(e) => setVipSeatNumber(Number(e.target.value))}
-                  className="w-full bg-stallion-navy border border-stallion-border rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-stallion-gold"
-                >
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25].map(
-                    (num) => (
-                      <option key={num} value={num}>
-                        Stallion #{num < 10 ? `0${num}` : num} &mdash; Founding Patron
-                      </option>
-                    )
-                  )}
-                </select>
-              </div>
-
-              <button
-                onClick={() => handleOpenBooking('Black Stallion VIP Circle', 50000, true)}
-                className="w-full py-4 rounded-xl bg-gradient-to-r from-stallion-gold via-stallion-gold-light to-stallion-gold text-stallion-dark font-black text-xs uppercase tracking-widest shadow-xl shadow-stallion-gold/25 hover:scale-105 transition"
+              <Link
+                to="/story"
+                className="text-xs font-bold text-blue-400 hover:text-white inline-flex items-center gap-1 transition"
               >
-                Claim Stallion #{vipSeatNumber < 10 ? `0${vipSeatNumber}` : vipSeatNumber}
-              </button>
+                <span>Read workshop syllabus on Story page &rarr;</span>
+              </Link>
             </div>
           </div>
-        </div>
+        </AnimatedSection>
       </section>
 
-      {/* ── Section: Full 9-Distance Rate Matrix Table ─────────────────────── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
-        <div className="text-center max-w-2xl mx-auto mb-10">
-          <span className="text-xs uppercase tracking-widest text-stallion-gold font-bold">
-            Transparent Pricing
-          </span>
-          <h2 className="text-3xl font-serif font-bold text-stallion-champagne mt-1">
-            ALL 9 DISTANCES RATE MATRIX
-          </h2>
-        </div>
-
-        <div className="glass-panel rounded-2xl overflow-x-auto border border-stallion-border">
-          <table className="w-full text-left text-xs min-w-[500px]">
-            <thead className="bg-stallion-navy/80 text-stallion-champagne border-b border-stallion-border uppercase font-serif tracking-wider">
-              <tr>
-                <th className="py-4 px-6 font-bold">Distance</th>
-                <th className="py-4 px-6 text-center font-bold">Basic (Trot)</th>
-                <th className="py-4 px-6 text-center font-bold text-stallion-gold">Standard</th>
-                <th className="py-4 px-6 text-center font-bold">Premium (Canter)</th>
-                <th className="py-4 px-6 text-center font-bold">Select</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-stallion-border/40 text-slate-300">
-              {distanceCatalog.map((row) => (
-                <tr
-                  key={row.distance}
-                  className={`hover:bg-stallion-navy/40 transition ${
-                    selectedDistance === row.distance ? 'bg-stallion-navy/30' : ''
-                  }`}
-                >
-                  <td className="py-4 px-6 font-bold text-stallion-champagne">{row.distance}</td>
-                  <td className="py-4 px-6 text-center">₹{row.basic}</td>
-                  <td className="py-4 px-6 text-center font-semibold text-stallion-gold">₹{row.standard}</td>
-                  <td className="py-4 px-6 text-center">₹{row.premium}</td>
-                  <td className="py-4 px-6 text-center">
-                    <button
-                      onClick={() => setSelectedDistance(row.distance)}
-                      className="px-3 py-1 rounded-lg text-[10px] uppercase font-bold border border-stallion-border hover:border-stallion-gold text-slate-300 hover:text-white"
-                    >
-                      View
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      {/* ── FAQ ──────────────────────────────────────────────────────────── */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
-        <div className="text-center mb-10">
-          <span className="text-xs uppercase tracking-widest text-stallion-gold font-bold">
-            Frequently Asked Questions
-          </span>
-          <h2 className="text-3xl font-serif font-bold text-stallion-champagne mt-1">
-            PACKAGE &amp; REGISTRATION DETAILS
-          </h2>
-        </div>
-
-        <div className="space-y-4">
-          {faqs.map((faq, idx) => (
-            <div
-              key={faq.q}
-              className="glass-panel rounded-xl border border-stallion-border overflow-hidden"
-            >
-              <button
-                onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                className="w-full py-4 px-6 text-left flex items-center justify-between text-sm font-semibold text-stallion-champagne hover:text-stallion-gold transition"
-              >
-                <span>{faq.q}</span>
-                <ChevronDown
-                  className={`w-4 h-4 text-stallion-gold transition-transform duration-300 ${
-                    openFaq === idx ? 'rotate-180' : ''
-                  }`}
-                />
-              </button>
-              {openFaq === idx && (
-                <div className="px-6 pb-4 text-xs text-slate-300 leading-relaxed border-t border-stallion-border/40 pt-3">
-                  {faq.a}
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── Booking Modal ─────────────────────────────────────────────────── */}
+      {/* ── Booking / Registration Modal ───────────────────────────────────── */}
       {activeModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
-          <div className="bg-stallion-dark border border-stallion-gold/60 rounded-3xl max-w-lg w-full p-6 sm:p-8 relative shadow-2xl overflow-y-auto max-h-[90vh]">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+          <div className="max-w-md w-full rounded-3xl bg-slate-900 border border-blue-500/40 p-6 sm:p-8 relative shadow-2xl">
             <button
               onClick={() => setActiveModal(null)}
-              className="absolute top-5 right-5 text-slate-400 hover:text-white p-1"
+              className="absolute top-4 right-4 text-slate-400 hover:text-white"
             >
               <X className="w-5 h-5" />
             </button>
 
-            {!bookingDone ? (
-              <form onSubmit={handleBookingSubmit} className="space-y-5">
-                <div>
-                  <span className="text-[10px] uppercase font-bold tracking-widest text-stallion-gold">
-                    {activeModal.isVip ? 'Founding Patronage' : 'Runner Registration'}
-                  </span>
-                  <h3 className="text-2xl font-serif font-bold text-stallion-champagne mt-0.5">
-                    {activeModal.tier}
-                  </h3>
-                  <p className="text-xs text-slate-300">
-                    Distance: <strong>{activeModal.distance}</strong> &bull; Total: ₹{activeModal.price.toLocaleString('en-IN')}
-                  </p>
-                </div>
-
-                {activeModal.tier === 'Premium' && (
-                  <div>
-                    <label className="block text-xs font-semibold text-stallion-champagne mb-1.5">
-                      Select Your Workshop Track:
-                    </label>
-                    <select
-                      value={workshopTrackChoice}
-                      onChange={(e) => setWorkshopTrackChoice(e.target.value)}
-                      className="w-full bg-stallion-card border border-stallion-border rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-stallion-gold"
-                    >
-                      <option value="Body">Track 1: BODY (Diet, Physical Wellbeing, Self-Defence)</option>
-                      <option value="Mind">Track 2: MIND (Attention Span, Cognitive &amp; Psych Wellbeing, Gratitude)</option>
-                      <option value="Edge">Track 3: EDGE (Pitch &amp; Sell, Internships, Cybercrime, Bullies)</option>
-                    </select>
-                  </div>
-                )}
-
-                {activeModal.isVip && (
-                  <div className="p-3.5 rounded-xl bg-stallion-card border border-stallion-gold/40 text-xs">
-                    <span className="text-stallion-gold font-bold block mb-1">
-                      Assigned Founding Seat: Stallion #{vipSeatNumber < 10 ? `0${vipSeatNumber}` : vipSeatNumber}
-                    </span>
-                    <span className="text-slate-300 text-[11px]">
-                      Permanent recognition as Founding Stallion on the Lemerian Wall.
-                    </span>
-                  </div>
-                )}
-
-                <div className="space-y-3">
-                  <input
-                    type="text"
-                    required
-                    placeholder="Full Name"
-                    value={attendeeName}
-                    onChange={(e) => setAttendeeName(e.target.value)}
-                    className="w-full bg-stallion-card border border-stallion-border rounded-xl px-4 py-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-stallion-gold"
-                  />
-                  <input
-                    type="email"
-                    required
-                    placeholder="Email Address"
-                    value={attendeeEmail}
-                    onChange={(e) => setAttendeeEmail(e.target.value)}
-                    className="w-full bg-stallion-card border border-stallion-border rounded-xl px-4 py-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-stallion-gold"
-                  />
-                  <input
-                    type="tel"
-                    required
-                    placeholder="Phone Number"
-                    value={attendeePhone}
-                    onChange={(e) => setAttendeePhone(e.target.value)}
-                    className="w-full bg-stallion-card border border-stallion-border rounded-xl px-4 py-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-stallion-gold"
-                  />
-                </div>
-
-                <div className="pt-3 border-t border-stallion-border flex items-center justify-between">
-                  <div>
-                    <span className="text-[11px] text-stallion-muted">Total Amount</span>
-                    <span className="block text-2xl font-serif font-black text-stallion-gold">
-                      ₹{activeModal.price.toLocaleString('en-IN')}
-                    </span>
-                  </div>
-                  <button
-                    type="submit"
-                    className="px-6 py-3 rounded-xl bg-gradient-to-r from-stallion-gold via-stallion-gold-light to-stallion-gold text-stallion-dark font-black text-xs uppercase tracking-widest hover:scale-105 transition shadow-lg shadow-stallion-gold/20"
-                  >
-                    Confirm Registration
-                  </button>
-                </div>
-              </form>
-            ) : (
+            {bookingDone ? (
               <div className="text-center py-6 space-y-4">
-                <div className="w-16 h-16 rounded-full bg-stallion-gold/20 text-stallion-gold flex items-center justify-center mx-auto border border-stallion-gold">
+                <div className="w-16 h-16 rounded-full bg-blue-600/20 border border-blue-400 flex items-center justify-center mx-auto text-blue-400">
                   <CheckCircle2 className="w-8 h-8" />
                 </div>
-                <h3 className="text-2xl font-serif font-bold text-stallion-champagne">
+                <h4 className="text-2xl font-serif font-black text-white">
                   Registration Confirmed!
-                </h3>
-                <p className="text-xs text-slate-300 max-w-sm mx-auto leading-relaxed">
-                  Welcome to Stallion Marathon Chapter I, <strong>{attendeeName || 'Participant'}</strong>!
-                  Your entry for <strong>{activeModal.tier} ({activeModal.distance})</strong> has been logged.
+                </h4>
+                <p className="text-xs text-slate-300">
+                  Thank you, <strong className="text-white">{fullName}</strong>! You are officially registered for the{' '}
+                  <strong className="text-blue-300">{activeModal.distance} ({activeModal.tier})</strong> run.
                 </p>
-                <div className="p-3.5 rounded-xl bg-stallion-card border border-stallion-border text-xs text-stallion-gold font-mono">
-                  REG ID: #STM-HYD-{Math.floor(100000 + Math.random() * 900000)}
+                <div className="p-3 rounded-xl bg-blue-950/60 border border-blue-900/60 text-xs text-slate-300 text-left space-y-1">
+                  <div><strong>Date:</strong> 14 March 2027</div>
+                  <div><strong>Venue:</strong> Lemerian Workin Caf&eacute;, Banjara Hills</div>
+                  <div><strong>Amount:</strong> ₹{activeModal.price}</div>
                 </div>
                 <button
                   onClick={() => setActiveModal(null)}
-                  className="px-8 py-3 rounded-full bg-stallion-gold text-stallion-dark text-xs font-bold uppercase tracking-widest"
+                  className="w-full py-3 rounded-xl bg-blue-600 text-white font-bold text-xs uppercase tracking-wider"
                 >
-                  Close Window
+                  Close
                 </button>
               </div>
+            ) : (
+              <form onSubmit={handleBookingSubmit} className="space-y-4">
+                <div>
+                  <span className="text-[10px] uppercase tracking-widest text-blue-400 font-bold block">
+                    Registration Desk
+                  </span>
+                  <h4 className="text-2xl font-serif font-bold text-white">
+                    {activeModal.tier} Package &bull; {activeModal.distance}
+                  </h4>
+                  <span className="text-base font-serif font-bold text-blue-300">
+                    Total: ₹{activeModal.price}
+                  </span>
+                </div>
+
+                <div>
+                  <label className="text-[11px] uppercase tracking-wider text-slate-400 block mb-1">Full Name</label>
+                  <input
+                    type="text"
+                    required
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
+                    placeholder="Enter your full name"
+                    className="w-full px-3.5 py-2 rounded-xl bg-blue-950/50 border border-blue-900/60 text-white text-xs focus:outline-none focus:border-blue-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-[11px] uppercase tracking-wider text-slate-400 block mb-1">Email Address</label>
+                  <input
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="name@domain.com"
+                    className="w-full px-3.5 py-2 rounded-xl bg-blue-950/50 border border-blue-900/60 text-white text-xs focus:outline-none focus:border-blue-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-[11px] uppercase tracking-wider text-slate-400 block mb-1">Mobile Number</label>
+                  <input
+                    type="tel"
+                    required
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    placeholder="+91 98765 43210"
+                    className="w-full px-3.5 py-2 rounded-xl bg-blue-950/50 border border-blue-900/60 text-white text-xs focus:outline-none focus:border-blue-500"
+                  />
+                </div>
+
+                <div className="pt-2">
+                  <button
+                    type="submit"
+                    className="w-full py-3.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs uppercase tracking-wider transition shadow-lg shadow-blue-600/30"
+                  >
+                    Confirm &amp; Proceed to Pay ₹{activeModal.price} &rarr;
+                  </button>
+                </div>
+
+                <p className="text-[11px] text-slate-400 text-center">
+                  Official timing chip, runner BIB &amp; race kit details sent via email &amp; SMS.
+                </p>
+              </form>
             )}
           </div>
         </div>

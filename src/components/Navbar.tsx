@@ -22,15 +22,15 @@ export const Navbar: React.FC = () => {
   const navLinks = [
     { name: 'Home', path: '/', icon: Trophy },
     { name: 'Story & Overview', path: '/story', icon: Compass },
-    { name: 'Packages & Tiers', path: '/packages', icon: Shield },
-    { name: 'Community & Impact', path: '/charity', icon: Heart },
+    { name: 'Packages', path: '/packages', icon: Shield },
+    { name: 'Charity', path: '/charity', icon: Heart },
   ];
 
   return (
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-stallion-dark/95 backdrop-blur-md border-b border-stallion-border/70 py-3 shadow-2xl'
+          ? 'bg-stallion-dark/95 backdrop-blur-md border-b border-blue-900/50 py-3 shadow-2xl'
           : 'bg-gradient-to-b from-stallion-dark/95 via-stallion-dark/60 to-transparent py-4'
       }`}
     >
@@ -54,7 +54,7 @@ export const Navbar: React.FC = () => {
           </div>
         </Link>
 
-        {/* Desktop Navigation - Refined Editorial Text */}
+        {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6 lg:gap-8 flex-shrink-0" aria-label="Main Navigation">
           {navLinks.map((link) => {
             const isActive = location.pathname === link.path;
@@ -93,7 +93,7 @@ export const Navbar: React.FC = () => {
             className="relative group overflow-hidden px-5 py-2.5 rounded-full border border-blue-400/50 text-xs font-bold tracking-widest uppercase text-white bg-blue-600 hover:bg-blue-500 transition-all duration-300 shadow-lg shadow-blue-600/30 flex items-center gap-2"
           >
             <Sparkles className="w-3.5 h-3.5 text-blue-200 group-hover:rotate-12 transition-transform" />
-            <span>Select Distance</span>
+            <span>Register Now &rarr;</span>
           </Link>
         </div>
 
@@ -109,7 +109,7 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile Drawer */}
       {isOpen && (
-        <div className="md:hidden bg-stallion-dark/95 backdrop-blur-xl border-b border-stallion-border px-6 py-6 transition-all duration-300 shadow-2xl">
+        <div className="md:hidden bg-stallion-dark/98 backdrop-blur-xl border-b border-blue-900/50 px-6 py-6 transition-all duration-300 shadow-2xl">
           <div className="flex flex-col gap-4">
             {navLinks.map((link) => {
               const isActive = location.pathname === link.path;
@@ -119,27 +119,27 @@ export const Navbar: React.FC = () => {
                   key={link.path}
                   to={link.path}
                   className={`flex items-center justify-between py-2 text-sm font-medium tracking-wide ${
-                    isActive ? 'text-stallion-gold font-bold' : 'text-slate-300'
+                    isActive ? 'text-blue-400 font-bold' : 'text-slate-300'
                   }`}
                 >
                   <div className="flex items-center gap-3">
-                    <Icon className="w-4 h-4 text-stallion-gold" />
+                    <Icon className="w-4 h-4 text-blue-400" />
                     <span>{link.name}</span>
                   </div>
                   <ChevronRight className="w-4 h-4 opacity-50" />
                 </Link>
               );
             })}
-            <div className="pt-4 border-t border-stallion-border/60">
-              <div className="mb-3 text-xs text-stallion-muted">
-                <span className="block text-stallion-gold font-semibold">14 March 2027</span>
-                <span>Lemerian Workin Café, Banjara Hills, Hyderabad</span>
+            <div className="pt-4 border-t border-blue-900/50">
+              <div className="mb-3 text-xs text-slate-400">
+                <span className="block text-white font-semibold">14 March 2027</span>
+                <span>Lemerian Workin Caf&eacute;, Banjara Hills, Hyderabad</span>
               </div>
               <Link
                 to="/packages"
-                className="w-full block text-center py-3 rounded-xl bg-gradient-to-r from-stallion-gold-dark via-stallion-gold to-stallion-gold-dark text-stallion-dark font-extrabold text-xs tracking-widest uppercase shadow-lg shadow-stallion-gold/20"
+                className="w-full block text-center py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-xs tracking-widest uppercase shadow-lg shadow-blue-600/30 transition"
               >
-                View Packages & VIP Circle
+                Register Now &rarr;
               </Link>
             </div>
           </div>

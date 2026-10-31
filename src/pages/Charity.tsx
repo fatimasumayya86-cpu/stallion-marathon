@@ -1,289 +1,239 @@
 import React, { useState } from 'react';
-import confetti from 'canvas-confetti';
 import { AnimatedSection } from '../components/AnimatedSection';
 import {
   Heart,
-  ShieldCheck,
-  Stethoscope,
   Users,
+  HandHeart,
+  ArrowRight,
+  ShieldCheck,
   CheckCircle2,
-  GraduationCap,
+  X,
+  Mail,
   Sparkles,
-  FileCheck,
 } from 'lucide-react';
 
 export const Charity: React.FC = () => {
-  const [pledgeAmount, setPledgeAmount] = useState<number>(1000);
-  const [customPledge, setCustomPledge] = useState<string>('');
-  const [pledged, setPledged] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
 
-  const presetPledges = [500, 1000, 2500, 5000, 10000];
-  const activeAmount = customPledge ? parseFloat(customPledge) || 0 : pledgeAmount;
-
-  const handlePledgeSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setPledged(true);
-    confetti({
-      particleCount: 100,
-      spread: 60,
-      origin: { y: 0.6 },
-      colors: ['#10B981', '#34D399', '#D4AF37', '#F6E4A8'],
-    });
+    setSubmitted(true);
   };
 
   return (
-    <div className="min-h-screen bg-stallion-dark pt-28 pb-20">
-      {/* ── Page Header ───────────────────────────────────────────────────── */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 text-center">
-        <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full border border-emerald-500/40 bg-stallion-card mb-4 text-xs font-bold uppercase tracking-widest text-emerald-400">
-          <Heart className="w-3.5 h-3.5" />
-          <span>The Proof Story &bull; Community &amp; Health Impact</span>
-        </div>
-        <h1 className="text-4xl sm:text-6xl font-serif font-black text-stallion-champagne tracking-tight">
-          &ldquo;YOUR EFFORT WILL IMPACT <br />
-          <span className="text-emerald-400">MORE THAN 20,000 PEOPLE.&rdquo;</span>
-        </h1>
-        <div className="w-20 h-0.5 bg-stallion-gold mx-auto my-6" />
-        <p className="max-w-3xl mx-auto text-slate-300 text-base sm:text-lg leading-relaxed">
-          The Stallion Marathon extends Lemerian's story into the city of Hyderabad.
-          Through on-ground doctor health screenings, workplace wellbeing workshops, and student outreach,
-          every stride creates verified real-world impact.
-        </p>
-      </div>
+    <div className="min-h-screen bg-stallion-dark text-slate-100 pt-28 pb-24">
+      {/* ── Page Header: Run for a Cause ───────────────────────────────────── */}
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 text-center">
+        <AnimatedSection direction="up">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-blue-500/40 bg-blue-950/70 mb-6 text-xs font-bold uppercase tracking-widest text-blue-300">
+            <Heart className="w-3.5 h-3.5 text-blue-400" />
+            <span>Community Impact &bull; Chapter I</span>
+          </div>
 
-      {/* ── Section: 3 Pillars of Community Impact ────────────────────────── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Pillar 1: Preventive Health */}
-          <AnimatedSection delay={0.1} className="glass-panel p-8 rounded-2xl flex flex-col justify-between glass-panel-hover">
+          <h1 className="text-4xl sm:text-6xl md:text-7xl font-serif font-black text-white tracking-tight mb-4">
+            Run for a Cause
+          </h1>
+
+          <div className="w-20 h-0.5 bg-blue-500 mx-auto my-6" />
+
+          {/* Intro */}
+          <p className="max-w-2xl mx-auto text-slate-200 text-base sm:text-lg leading-relaxed font-light">
+            Every stride you take can power someone else forward. The Stallion Marathon connects personal discipline
+            with meaningful community support across Hyderabad.
+          </p>
+        </AnimatedSection>
+      </section>
+
+      {/* ── 4 Core Pillars of Cause & Partnership ──────────────────────────── */}
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* 1. Our Partner */}
+          <AnimatedSection delay={0.1} direction="up" className="glass-panel rounded-3xl p-8 border border-blue-900/60 glass-panel-hover flex flex-col justify-between">
             <div>
-              <div className="w-12 h-12 rounded-xl bg-emerald-950/60 border border-emerald-500/40 flex items-center justify-center text-emerald-400 mb-6">
-                <Stethoscope className="w-6 h-6" />
+              <div className="w-12 h-12 rounded-2xl bg-blue-950/80 border border-blue-500/40 flex items-center justify-center text-blue-400 mb-6">
+                <HandHeart className="w-6 h-6" />
               </div>
-              <h3 className="text-xl font-serif font-bold text-stallion-champagne mb-2">
-                On-Ground Doctor Screenings
+              <span className="text-xs uppercase tracking-widest text-blue-400 font-bold block mb-1">
+                Official Collaboration
+              </span>
+              <h3 className="text-2xl font-serif font-bold text-white mb-3">
+                Our Partner
               </h3>
-              <p className="text-xs text-slate-300 leading-relaxed mb-6">
-                Practising doctors on-site at the marathon evaluate key health metrics &mdash; blood pressure,
-                cardiac vitals, and metabolic markers &mdash; catching what packed corporate calendars let slide.
+              <p className="text-slate-300 text-sm leading-relaxed mb-4">
+                Partner announcements will be published once verified details and formal MoUs are confirmed by the organizing committee.
               </p>
-            </div>
-            <div className="pt-4 border-t border-stallion-border/40 text-xs text-emerald-400 font-semibold flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
-              <span>Available to All Standard &amp; Premium Runners</span>
+              <div className="p-4 rounded-xl bg-blue-950/40 border border-blue-900/50 text-xs text-slate-300">
+                <strong className="text-white block mb-0.5">Partner Organization:</strong>
+                Official non-profit foundation partner to be announced shortly.
+              </div>
             </div>
           </AnimatedSection>
 
-          {/* Pillar 2: Mental Health & Wellbeing Workshops */}
-          <AnimatedSection delay={0.2} className="glass-panel p-8 rounded-2xl flex flex-col justify-between glass-panel-hover">
+          {/* 2. Who It Helps */}
+          <AnimatedSection delay={0.2} direction="up" className="glass-panel rounded-3xl p-8 border border-blue-900/60 glass-panel-hover flex flex-col justify-between">
             <div>
-              <div className="w-12 h-12 rounded-xl bg-purple-950/60 border border-purple-500/40 flex items-center justify-center text-purple-400 mb-6">
-                <GraduationCap className="w-6 h-6" />
-              </div>
-              <h3 className="text-xl font-serif font-bold text-stallion-champagne mb-2">
-                Workplace Mind &amp; Body Workshops
-              </h3>
-              <p className="text-xs text-slate-300 leading-relaxed mb-6">
-                11 interactive workshops covering attention spans, psychological resilience, nutrition,
-                and self-defence. Helping working professionals build sustainable high performance.
-              </p>
-            </div>
-            <div className="pt-4 border-t border-stallion-border/40 text-xs text-purple-400 font-semibold flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
-              <span>Conducted in Small Batches (30–100 Participants)</span>
-            </div>
-          </AnimatedSection>
-
-          {/* Pillar 3: Student & Community Inclusivity */}
-          <AnimatedSection delay={0.3} className="glass-panel p-8 rounded-2xl flex flex-col justify-between glass-panel-hover">
-            <div>
-              <div className="w-12 h-12 rounded-xl bg-blue-950/60 border border-blue-500/40 flex items-center justify-center text-blue-400 mb-6">
+              <div className="w-12 h-12 rounded-2xl bg-blue-950/80 border border-blue-500/40 flex items-center justify-center text-blue-400 mb-6">
                 <Users className="w-6 h-6" />
               </div>
-              <h3 className="text-xl font-serif font-bold text-stallion-champagne mb-2">
-                Student &amp; Youth Sponsorship
+              <span className="text-xs uppercase tracking-widest text-blue-400 font-bold block mb-1">
+                Beneficiaries &amp; Cause
+              </span>
+              <h3 className="text-2xl font-serif font-bold text-white mb-3">
+                Who It Helps
               </h3>
-              <p className="text-xs text-slate-300 leading-relaxed mb-6">
-                Connecting with colleges and universities across Hyderabad (including GRIET GDGOC events),
-                offering accessible entry points from 1 KM so every young runner can take part.
+              <p className="text-slate-300 text-sm leading-relaxed mb-4">
+                Initiatives focused on youth athletic development, grassroots physical literacy, and preventive health screenings for underserved communities in Hyderabad.
               </p>
+              <ul className="space-y-2 text-xs text-slate-300">
+                <li className="flex items-center gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-blue-400" />
+                  <span>Grassroots sports equipment &amp; coaching support</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-blue-400" />
+                  <span>Free community medical &amp; preventive health camps</span>
+                </li>
+              </ul>
             </div>
-            <div className="pt-4 border-t border-stallion-border/40 text-xs text-blue-400 font-semibold flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
-              <span>Full Community Entry from ₹299</span>
+          </AnimatedSection>
+
+          {/* 3. How Your Registration Helps */}
+          <AnimatedSection delay={0.3} direction="up" className="glass-panel rounded-3xl p-8 border border-blue-500/50 shadow-xl shadow-blue-600/10 glass-panel-hover md:col-span-2">
+            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-6 border-b border-blue-900/50">
+              <div>
+                <span className="text-xs uppercase tracking-widest text-blue-400 font-bold block mb-1">
+                  Direct Pledge
+                </span>
+                <h3 className="text-2xl sm:text-3xl font-serif font-bold text-white">
+                  How Your Registration Helps
+                </h3>
+              </div>
+              <div className="px-4 py-2 rounded-xl bg-blue-600/20 border border-blue-500/30 text-xs font-semibold text-blue-300">
+                100% Transparent Allocation
+              </div>
+            </div>
+
+            <div className="pt-6 grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-slate-300 leading-relaxed">
+              <p>
+                A designated portion of every runner ticket fee will be directly allocated to our verified partner organization, providing tangible resources that help young runners and community members access equipment and health care.
+              </p>
+              <p>
+                Full audited contribution receipts and community impact reports will be shared transparently with all registered participants following race day on 14 March 2027.
+              </p>
             </div>
           </AnimatedSection>
         </div>
-      </section>
 
-      {/* ── Section: Evidence & Verified Proof ────────────────────────────── */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
-        <div className="rounded-3xl glass-panel p-8 sm:p-12 border border-stallion-border">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-            <div className="space-y-4">
-              <span className="text-xs uppercase tracking-widest text-stallion-gold font-bold">
-                Section 12 of Concept Brief
-              </span>
-              <h2 className="text-3xl font-serif font-bold text-stallion-champagne">
-                The Proof Story &amp; Evidence
-              </h2>
-              <p className="text-xs text-slate-300 leading-relaxed">
-                Sponsors and partners want evidence that India's first Workin Café exists and changes lives.
-                Lemerian is collecting verified written testimonials from regulars &mdash; with signatures,
-                headshots, and documented stories of rebuilding focus and confidence.
-              </p>
-
-              {/* Labelled Placeholders as required by Content Restrictions */}
-              <div className="space-y-3 pt-2">
-                <div className="p-3.5 rounded-xl bg-stallion-card/90 border border-stallion-border text-xs text-stallion-muted">
-                  <span className="text-stallion-gold font-semibold block mb-1">
-                    [Content Placeholder: Registered Non-Profit / NGO Partner Identification]
-                  </span>
-                  Official philanthropic partner MoUs and certified 80G tax registration numbers will be published upon final execution of the partnership agreements.
-                </div>
-
-                <div className="p-3.5 rounded-xl bg-stallion-card/90 border border-stallion-border text-xs text-stallion-muted">
-                  <span className="text-stallion-gold font-semibold block mb-1">
-                    [Content Placeholder: Verified Community Outreach Case Studies &amp; Signatures]
-                  </span>
-                  Full testimonial dossier with signed consent forms from Lemerian community regulars will lead the official sponsor deck and media releases.
-                </div>
-              </div>
-            </div>
-
-            <div className="rounded-3xl border border-blue-500/40 bg-gradient-to-br from-blue-950/70 via-slate-900 to-blue-950/80 p-8 shadow-2xl space-y-6">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-blue-600/30 border border-blue-400/50 flex items-center justify-center">
-                  <Heart className="w-5 h-5 text-blue-300" />
-                </div>
-                <div>
-                  <span className="text-xs uppercase tracking-widest text-blue-400 font-bold block">Evidence Standard</span>
-                  <span className="font-serif text-xl font-bold text-white block">Verifiable Community Impact</span>
-                </div>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-blue-950/80 border border-blue-500/30 space-y-2">
-                <span className="text-xs font-serif italic text-blue-200 block">
-                  &ldquo;Your effort will impact more than 20,000 people.&rdquo;
-                </span>
-                <span className="text-[11px] text-slate-400 block">
-                  Strictly backed by verified case studies, doctor attendance logs, and participant data.
-                </span>
-              </div>
-
-              <div className="space-y-3 text-xs text-slate-300 border-t border-blue-900/50 pt-4">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0" />
-                  <span>Doctor-led on-ground health screenings for all participants</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0" />
-                  <span>Subsidized community &amp; student runner access</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0" />
-                  <span>Direct lead transfer and co-marketing rights for sponsors</span>
-                </div>
-              </div>
-            </div>
-          </div>
+        {/* ── CTA Button: Contribute / Learn More ────────────────────────────── */}
+        <div className="text-center mt-12">
+          <button
+            onClick={() => setModalOpen(true)}
+            className="inline-flex items-center gap-2 px-9 py-4 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-extrabold text-sm uppercase tracking-[0.2em] shadow-xl shadow-blue-600/40 hover:scale-105 transition duration-300 border border-blue-400/50"
+          >
+            <span>Contribute / Learn More &rarr;</span>
+          </button>
         </div>
       </section>
 
-      {/* ── Section: Community Sponsor / Supporter Pledge Form ─────────────── */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-20">
-        <div className="glass-panel p-8 sm:p-12 rounded-3xl border border-stallion-gold/40 shadow-2xl">
-          <div className="text-center max-w-xl mx-auto mb-10">
-            <span className="text-xs uppercase tracking-widest text-emerald-400 font-bold">
-              Community Health Fund
-            </span>
-            <h2 className="text-3xl font-serif font-black text-stallion-champagne mt-1">
-              SUPPORT STUDENT &amp; RUNNER HEALTH CHECKS
-            </h2>
-            <p className="text-xs text-stallion-muted mt-2">
-              Sponsor additional medical test kits, doctor hours, or student runner kits for Chapter I.
-            </p>
-          </div>
+      {/* ── Modal: Contribute / Inquire ────────────────────────────────────── */}
+      {modalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+          <div className="max-w-md w-full rounded-3xl bg-slate-900 border border-blue-500/40 p-6 sm:p-8 relative shadow-2xl">
+            <button
+              onClick={() => {
+                setModalOpen(false);
+                setSubmitted(false);
+              }}
+              className="absolute top-4 right-4 text-slate-400 hover:text-white"
+            >
+              <X className="w-5 h-5" />
+            </button>
 
-          {!pledged ? (
-            <form onSubmit={handlePledgeSubmit} className="space-y-6">
-              <div className="grid grid-cols-3 sm:grid-cols-5 gap-3">
-                {presetPledges.map((amt) => (
-                  <button
-                    type="button"
-                    key={amt}
-                    onClick={() => {
-                      setPledgeAmount(amt);
-                      setCustomPledge('');
-                    }}
-                    className={`py-3 rounded-xl font-serif font-bold text-sm transition-all duration-200 border ${
-                      pledgeAmount === amt && !customPledge
-                        ? 'bg-stallion-gold text-stallion-dark border-stallion-gold shadow-lg shadow-stallion-gold/20 scale-105'
-                        : 'bg-stallion-card border-stallion-border text-slate-200 hover:border-stallion-gold/50'
-                    }`}
-                  >
-                    ₹{amt.toLocaleString('en-IN')}
-                  </button>
-                ))}
-              </div>
-
-              <div className="relative max-w-xs mx-auto">
-                <span className="absolute left-4 top-2.5 text-sm text-stallion-gold font-bold">₹</span>
-                <input
-                  type="number"
-                  placeholder="Or enter custom pledge amount"
-                  value={customPledge}
-                  onChange={(e) => setCustomPledge(e.target.value)}
-                  className="w-full bg-stallion-card border border-stallion-border rounded-xl pl-8 pr-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-stallion-gold"
-                />
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <input
-                  type="text"
-                  required
-                  placeholder="Your Name / Organization"
-                  className="bg-stallion-card border border-stallion-border rounded-xl px-4 py-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-stallion-gold"
-                />
-                <input
-                  type="email"
-                  required
-                  placeholder="Email Address"
-                  className="bg-stallion-card border border-stallion-border rounded-xl px-4 py-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-stallion-gold"
-                />
-              </div>
-
-              <div className="text-center pt-2">
+            {submitted ? (
+              <div className="text-center py-6 space-y-4">
+                <div className="w-16 h-16 rounded-full bg-blue-600/20 border border-blue-400 flex items-center justify-center mx-auto text-blue-400">
+                  <CheckCircle2 className="w-8 h-8" />
+                </div>
+                <h4 className="text-2xl font-serif font-black text-white">
+                  Message Received
+                </h4>
+                <p className="text-xs text-slate-300">
+                  Thank you, <strong className="text-white">{name}</strong>. Our partnership and charity relations team will connect with you with the official partner brief.
+                </p>
                 <button
-                  type="submit"
-                  className="px-10 py-3.5 rounded-full bg-gradient-to-r from-emerald-500 via-teal-400 to-emerald-500 text-stallion-dark font-extrabold text-xs uppercase tracking-widest shadow-xl shadow-emerald-500/20 hover:scale-105 transition"
+                  onClick={() => {
+                    setModalOpen(false);
+                    setSubmitted(false);
+                  }}
+                  className="w-full py-3 rounded-xl bg-blue-600 text-white font-bold text-xs uppercase tracking-wider"
                 >
-                  Pledge ₹{activeAmount.toLocaleString('en-IN')} to Health Initiative
+                  Close
                 </button>
               </div>
-            </form>
-          ) : (
-            <div className="text-center py-8 space-y-4">
-              <div className="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto border border-emerald-500">
-                <CheckCircle2 className="w-8 h-8" />
-              </div>
-              <h3 className="text-2xl font-serif font-bold text-stallion-champagne">
-                Pledge Successfully Received!
-              </h3>
-              <p className="text-xs text-slate-300 max-w-md mx-auto leading-relaxed">
-                Thank you for contributing ₹{activeAmount.toLocaleString('en-IN')} toward on-ground
-                health screenings and student participation for Stallion Marathon Chapter I.
-              </p>
-              <button
-                onClick={() => setPledged(false)}
-                className="px-6 py-2.5 rounded-full border border-stallion-border text-xs text-slate-300 hover:text-white"
-              >
-                Pledge Another Contribution
-              </button>
-            </div>
-          )}
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <span className="text-[10px] uppercase tracking-widest text-blue-400 font-bold block">
+                    Community Desk
+                  </span>
+                  <h4 className="text-2xl font-serif font-bold text-white">
+                    Contribute / Learn More
+                  </h4>
+                  <p className="text-xs text-slate-300 mt-1">
+                    Connect regarding charity sponsorships, CSR pledges, or non-profit partner inquiries.
+                  </p>
+                </div>
+
+                <div>
+                  <label className="text-[11px] uppercase tracking-wider text-slate-400 block mb-1">Your Name</label>
+                  <input
+                    type="text"
+                    required
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Enter your name"
+                    className="w-full px-3.5 py-2 rounded-xl bg-blue-950/50 border border-blue-900/60 text-white text-xs focus:outline-none focus:border-blue-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-[11px] uppercase tracking-wider text-slate-400 block mb-1">Email Address</label>
+                  <input
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="name@domain.com"
+                    className="w-full px-3.5 py-2 rounded-xl bg-blue-950/50 border border-blue-900/60 text-white text-xs focus:outline-none focus:border-blue-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="text-[11px] uppercase tracking-wider text-slate-400 block mb-1">Message / Inquiry</label>
+                  <textarea
+                    rows={3}
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    placeholder="Tell us how you would like to contribute or collaborate..."
+                    className="w-full px-3.5 py-2 rounded-xl bg-blue-950/50 border border-blue-900/60 text-white text-xs focus:outline-none focus:border-blue-500"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full py-3.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs uppercase tracking-wider transition shadow-lg shadow-blue-600/30"
+                >
+                  Send Inquiry &rarr;
+                </button>
+              </form>
+            )}
+          </div>
         </div>
-      </section>
+      )}
     </div>
   );
 };
