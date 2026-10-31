@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A1202" />
+      <stop offset="60%" stop-color="#0E1424" />
+      <stop offset="100%" stop-color="#070A10" />
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFF0A5" />
+      <stop offset="50%" stop-color="#D4AF37" />
+      <stop offset="100%" stop-color="#8E6B15" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)" rx="16"/>
+  <!-- Crown Icon -->
+  <path d="M350 180 L375 240 L400 170 L425 240 L450 180 L440 260 L360 260 Z" fill="url(#gold)" />
+  <rect x="360" y="265" width="80" height="8" rx="4" fill="url(#gold)" />
+  
+  <text x="400" y="330" font-family="'Cinzel', serif" font-size="30" font-weight="bold" fill="#F8F4EA" text-anchor="middle" letter-spacing="3">ROYAL ENCLOSURE</text>
+  <text x="400" y="370" font-family="'Plus Jakarta Sans', sans-serif" font-size="15" fill="#D4AF37" text-anchor="middle" letter-spacing="1">Private Pavilion &bull; Helicopter Transfers &bull; Michelin Banquet</text>
+</svg>
+

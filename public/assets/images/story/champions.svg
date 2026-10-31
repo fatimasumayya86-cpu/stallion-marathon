@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#140E0A" />
+      <stop offset="50%" stop-color="#24160E" />
+      <stop offset="100%" stop-color="#070A10" />
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FCEBA7" />
+      <stop offset="50%" stop-color="#D4AF37" />
+      <stop offset="100%" stop-color="#8E6B15" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)" />
+  <!-- Trophy wreath -->
+  <circle cx="400" cy="270" r="140" fill="none" stroke="url(#gold)" stroke-width="3" stroke-dasharray="14 8" opacity="0.6"/>
+  <!-- Laurel sprig elements -->
+  <path d="M280 270 Q 300 210 370 170" fill="none" stroke="url(#gold)" stroke-width="4" stroke-linecap="round"/>
+  <path d="M520 270 Q 500 210 430 170" fill="none" stroke="url(#gold)" stroke-width="4" stroke-linecap="round"/>
+  
+  <text x="400" y="275" font-family="'Cinzel', serif" font-size="54" font-weight="900" fill="url(#gold)" text-anchor="middle">X</text>
+  <text x="400" y="320" font-family="'Cinzel', serif" font-size="16" font-weight="bold" fill="#F8F4EA" text-anchor="middle" letter-spacing="3">TEN LEGENDARY BLOODLINES</text>
+  
+  <text x="400" y="470" font-family="'Cinzel', serif" font-size="28" font-weight="bold" fill="#F8F4EA" text-anchor="middle" letter-spacing="4">THE HALL OF CHAMPIONS</text>
+  <text x="400" y="505" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" fill="#8D9BB0" text-anchor="middle" letter-spacing="2">HONORING EQUINE NOBILITY THROUGH THE CENTURIES</text>
+</svg>
+

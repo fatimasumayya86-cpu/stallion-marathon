@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#051419" />
+      <stop offset="50%" stop-color="#0E2824" />
+      <stop offset="100%" stop-color="#070A10" />
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FCEBA7" />
+      <stop offset="50%" stop-color="#D4AF37" />
+      <stop offset="100%" stop-color="#8E6B15" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)" />
+  <!-- Mountain Terrain Profile -->
+  <path d="M0 450 L140 320 L280 400 L420 260 L560 360 L700 230 L800 350 L800 600 L0 600 Z" fill="#0A181C" opacity="0.8"/>
+  <path d="M0 480 L180 390 L340 440 L500 330 L660 410 L800 340 L800 600 L0 600 Z" fill="#0E2429" opacity="0.9"/>
+  
+  <!-- Trail Path glowing in gold -->
+  <path d="M50 530 Q 220 480 380 440 T 750 320" fill="none" stroke="url(#gold)" stroke-width="4" stroke-dasharray="8 8" />
+  
+  <text x="400" y="160" font-family="'Cinzel', serif" font-size="32" font-weight="bold" fill="#F8F4EA" text-anchor="middle" letter-spacing="4">THE 100-MILE WILDERNESS</text>
+  <text x="400" y="200" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" fill="#D4AF37" text-anchor="middle" letter-spacing="2">EXTREME ELEVATION &bull; UNSPOILED NATURE &bull; RAW GRIT</text>
+</svg>
+

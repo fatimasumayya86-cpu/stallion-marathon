@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141E15" />
+      <stop offset="60%" stop-color="#0E1B15" />
+      <stop offset="100%" stop-color="#070A10" />
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFF0A5" />
+      <stop offset="50%" stop-color="#D4AF37" />
+      <stop offset="100%" stop-color="#8E6B15" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)" rx="16"/>
+  <!-- Leaf and Sprout -->
+  <path d="M400 170 C360 210 360 260 400 280 C440 260 440 210 400 170 Z" fill="none" stroke="url(#gold)" stroke-width="5" />
+  <path d="M400 170 L400 280" stroke="url(#gold)" stroke-width="3" />
+  
+  <text x="400" y="380" font-family="'Cinzel', serif" font-size="28" font-weight="bold" fill="#F8F4EA" text-anchor="middle" letter-spacing="3">HIGHLAND CORRIDOR REWILDING</text>
+  <text x="400" y="420" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" fill="#86EFAC" text-anchor="middle">CARBON OFFSET &bull; NATIVE SPECIES RESTORATION &bull; CLEAN WATERSHEDS</text>
+</svg>
+

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A1828" />
+      <stop offset="60%" stop-color="#0E1424" />
+      <stop offset="100%" stop-color="#070A10" />
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFF0A5" />
+      <stop offset="50%" stop-color="#D4AF37" />
+      <stop offset="100%" stop-color="#8E6B15" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)" rx="16"/>
+  <!-- Rising Sun and Feather / Book -->
+  <circle cx="400" cy="220" r="50" fill="none" stroke="url(#gold)" stroke-width="4" stroke-dasharray="8 6"/>
+  <path d="M370 230 L400 180 L430 230 Z" fill="url(#gold)" />
+  
+  <text x="400" y="380" font-family="'Cinzel', serif" font-size="28" font-weight="bold" fill="#F8F4EA" text-anchor="middle" letter-spacing="3">YOUTH APPRENTICESHIP SCHOLARSHIPS</text>
+  <text x="400" y="420" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" fill="#C4B5FD" text-anchor="middle">500+ RIDERS TRAINED &bull; FULL HORSEMANSHIP ACADEMY</text>
+</svg>
+
